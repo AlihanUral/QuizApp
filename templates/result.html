@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Sonuçlar</h1>
+<p>Toplam doğru cevap sayınız: {{ score }}</p>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Soru</th>
+            <th>Verdiğiniz Cevap</th>
+            <th>Doğru Cevap</th>
+            <th>Durum</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for result in results %}
+        <tr>
+            <td>{{ result.question }}</td>
+            <td>
+                {% if result.user_answer %}
+                    {{ result.user_answer }}
+                {% else %}
+                    <em>Boş bırakıldı</em>
+                {% endif %}
+            </td>
+            <td>{{ result.correct_answer }}</td>
+            <td>
+                {% if result.is_correct %}
+                    <span class="text-success">Doğru</span>
+                {% else %}
+                    <span class="text-danger">Yanlış</span>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="/" class="btn btn-secondary">Ana Sayfaya Dön</a>
+{% endblock %}
